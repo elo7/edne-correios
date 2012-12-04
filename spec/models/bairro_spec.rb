@@ -1,34 +1,25 @@
 # encoding: utf-8
 
-require "./spec_helper"
+require "./spec/spec_helper"
 
 describe Bairro do
-  subject(:bairro) { Bairro.new }
+  before do
+    @bairro_csv   = "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@DEL"
+    @bairro_array = @bairro_csv.split "@"
+    @bairro       = Bairro.new @bairro_array
+  end
 
-  it_should_behave_like CorreiosCSVParseable, Bairro.new, 2
+  describe "#initialize" do
+    it "fills a bairro" do
+      assert_equal @bairro.to_s, @bairro_csv
+    end
+  end
 
   describe "#parse" do
-    it "parses bairros fixture correctly and assings attributes properly" do
-      bairros = Bairro.parse "./spec/fixtures/Bairro.fixture"
-
-      first_bairro = bairros.first
-
-      expect(first_bairro.bai_nu).to eq "13370"
-      expect(first_bairro.ufe_sg).to eq "RS"
-      expect(first_bairro.loc_nu).to eq "7953"
-      expect(first_bairro.bai_no).to eq "Loteamento Cidade Universitaria"
-      expect(first_bairro.bai_no_abrev).to eq "Lot C Universitaria"
-      expect(first_bairro.bai_operacao).to eq "DEL"
-
-      second_bairro = bairros.last
-
-      expect(second_bairro.bai_nu).to eq "13371"
-      expect(second_bairro.ufe_sg).to eq "RS"
-      expect(second_bairro.loc_nu).to eq "7953"
-      expect(second_bairro.bai_no).to eq "Loteamento Escola Rural"
-      expect(second_bairro.bai_no_abrev).to eq "Lot E Rural"
-      expect(second_bairro.bai_operacao).to eq "DEL"
-
+    it "parses default file" do
+      bairros = Bairro.parse "./spec/fixtures/bairro.fixture"
+      assert_equal bairros[0].to_s, "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@DEL"
+      assert_equal bairros[1].to_s, "13371@RS@7953@Loteamento Escola Rural@Lot E Rural@DEL"
     end
   end
 end

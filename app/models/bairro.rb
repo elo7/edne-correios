@@ -11,8 +11,29 @@
 require "csv"
 
 class Bairro
-  include CorreiosCSVParseable
+  @@column_names = %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao)
 
-  default_filename "DELTA_LOG_BAIRRO.TXT"
-  attr_csv_parseable :bai_nu, :ufe_sg, :loc_nu, :bai_no, :bai_no_abrev, :bai_operacao
+  @@column_names.each {|name| attr_accessor name}
+
+  def initialize row
+    fill! row
+  end
+
+  def self.parse file_name="DELTA_LOG_BAIRRO.TXT"
+    bairros = []
+    CSV.foreach(file_name, col_sep: "@", encoding: "ISO-8859-1") do |row|
+      bairros.push Bairro.new row
+    end
+    bairros
+  end
+
+  def fill! row
+    @@column_names.each_with_index do |name, index|
+      public_send "#{name}=", row[index]
+    end
+  end
+
+  def to_s
+    @@column_names.collect {|name| public_send name }.join "@"
+  end
 end
