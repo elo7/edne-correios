@@ -4,10 +4,6 @@ module CSVModel
     base.extend ClassMethods
   end
 
-  def initialize row
-    fill! row
-  end
-
   def fill! row
     column_names.each_with_index do |name, index|
       public_send "#{name}=", row[index]
@@ -34,12 +30,11 @@ module CSVModel
     def parse file_name=self.default_file_name
       models = []
       CSV.foreach(file_name, col_sep: "@", encoding: "ISO-8859-1") do |row|
-        model = new row
-        model.fill!
+        model = new
+        model.fill! row
         models.push model
       end
       models
     end
   end
 end
-

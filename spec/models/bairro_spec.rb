@@ -6,11 +6,12 @@ describe Bairro do
   before do
     @bairro_csv   = "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@DEL"
     @bairro_array = @bairro_csv.split "@"
-    @bairro       = Bairro.new @bairro_array
+    @bairro       = Bairro.new #@bairro_array
   end
 
-  describe "#initialize" do
+  describe "#fill" do
     it "fills a bairro" do
+      @bairro.fill! @bairro_array
       assert_equal @bairro.to_s, @bairro_csv
     end
   end

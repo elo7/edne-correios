@@ -21,11 +21,6 @@ require "csv"
 class Localidade
   include CSVModel
 
-  @@column_names = %w(loc_nu ufe_sg loc_no cep loc_in_sit loc_in_tipo_loc loc_nu_sub loc_no_abrev mun_nu loc_operacao cep_ant)
-  @@column_names.each {|name| attr_accessor name}
-  @@default_file_name = "DELTA_LOG_LOCALIDADE.TXT"
-
-  def initialize row
-    fill! row
-  end
+  csv_model column_names: %w(loc_nu ufe_sg loc_no cep loc_in_sit loc_in_tipo_loc loc_nu_sub loc_no_abrev mun_nu loc_operacao cep_ant),
+            default_file_name: "DELTA_LOG_LOCALIDADE.TXT"
 end
