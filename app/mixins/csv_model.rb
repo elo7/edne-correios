@@ -17,7 +17,6 @@ module CSVModel
   end
 
   module ClassMethods
-
     def csv_model options={}
       column_names = options.fetch(:column_names)
       define_method :column_names do
