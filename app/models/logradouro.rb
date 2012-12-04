@@ -14,8 +14,6 @@
 # LOG_OPERACAO    | Operação: DEL, INS, UPD                                          | CHAR(3)
 # CEP_ANT         | CEP Anterior do Logradouro. Campo informado para LOG_OPERACAO =UPD.  | CHAR(8)
 
-require "csv"
-
 class Logradouro
   include CSVModel
 

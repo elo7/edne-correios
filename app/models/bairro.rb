@@ -8,8 +8,6 @@
 # BAI_NO_ABREV | abreviatura do nome do bairro (opcional)            | VARCHAR2(36)
 # BAI_OPERACAO | Operação: DEL = Delete, INS  = Insert, UPD = Update | CHAR(3)
 
-require "csv"
-
 class Bairro
   include CSVModel
 

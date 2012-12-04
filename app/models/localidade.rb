@@ -16,8 +16,6 @@
 # LOC_OPERACAO     | Operação: DEL = Delete, INS  = Insert, UPD = Update                                     | CHAR(3)
 # CEP_ANT          | CEP anterior da localidade. Campo informado para LOC_OPERACAO=UPD                       | CHAR(8)
 
-require "csv"
-
 class Localidade
   include CSVModel
 

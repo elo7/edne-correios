@@ -1,3 +1,5 @@
+require "csv"
+
 module CSVModel
 
   def self.included base
