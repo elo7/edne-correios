@@ -6,7 +6,7 @@ describe Bairro do
   before do
     @bairro_csv   = "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@DEL"
     @bairro_array = @bairro_csv.split "@"
-    @bairro       = Bairro.new #@bairro_array
+    @bairro       = Bairro.new
   end
 
   describe "#fill" do

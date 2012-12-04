@@ -6,11 +6,12 @@ describe Localidade do
   before do
     @localidade_csv   = "6389@PR@Nova Santa Helena@87564000@0@D@6175@Nova Sta Helena@       @UPD@87564000"
     @localidade_array = @localidade_csv.split "@"
-    @localidade       = Localidade.new @localidade_array
+    @localidade       = Localidade.new
   end
 
   describe "#initialize" do
     it "fills a localidade" do
+      @localidade.fill! @localidade_array
       assert_equal @localidade.to_s, @localidade_csv
     end
   end
