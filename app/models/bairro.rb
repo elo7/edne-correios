@@ -14,3 +14,4 @@ class Bairro
   csv_model column_names: %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao),
             default_file_name: "DELTA_LOG_BAIRRO.TXT"
 end
+
