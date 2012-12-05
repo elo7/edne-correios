@@ -10,8 +10,17 @@
 
 class Bairro
   include CSVModel
+  include DataMapper::Resource
 
   csv_model column_names: %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao),
-            default_file_name: "DELTA_LOG_BAIRRO.TXT"
+    default_file_name: "DELTA_LOG_BAIRRO.TXT"
+
+  property :id           , Serial
+  property :bai_nu       , String
+  property :ufe_sg       , String
+  property :loc_nu       , String
+  property :bai_no       , String
+  property :bai_no_abrev , String
+  property :bai_operacao , String
 end
 
