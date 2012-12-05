@@ -1,2 +1,3 @@
 vendor/ruby
 .DS_Store
+data/*
