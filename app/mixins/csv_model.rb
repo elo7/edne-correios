@@ -36,7 +36,7 @@ module CSVModel
         column_names
       end
 
-      column_names.each {|name| attr_accessor name}
+      column_names.each{|name| attr_accessor name}
 
       define_method :default_file_name do 
         options.fetch(:default_file_name)
@@ -49,9 +49,13 @@ module CSVModel
 
     def parse file_name=self.default_file_name
       models = []
-      CSV.foreach(file_name, col_sep: "@", encoding: "ISO-8859-1") do |row|
+
+      open(file_name, "r:ISO-8859-1").readlines.each do |line|
+        line.gsub! "\n", ""
+        line.gsub! "\r", ""
+
         model = new
-        model.fill! row
+        model.fill! line.split("@")
         models.push model
       end
       models

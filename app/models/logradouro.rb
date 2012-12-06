@@ -17,7 +17,26 @@
 
 class Logradouro
   include CSVModel
+  include DataMapper::Resource
 
-  csv_model column_names: %w(log_nu ufe_sg loc_nu bai_nu_ini bai_nu_fim log_no log_complemento cep tlo_tx log_sta_tlo log_no_abrev log_operacao cep_ant),
+  COLUMN_NAMES = %w(log_nu ufe_sg loc_nu bai_nu_ini bai_nu_fim log_no log_complemento cep tlo_tx log_sta_tlo log_no_abrev log_operacao cep_ant)
+
+  csv_model column_names: COLUMN_NAMES,
             default_file_name: "DELTA_LOG_LOGRADOURO.TXT"
+
+  property :id, Serial
+  COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
+
+  def self.import_from_log
+    %w(AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO).each do |uf|
+      parse("./data/log/LOG_LOGRADOURO_#{uf}.txt").each do |model|
+        begin
+          model.save
+          print "."
+        rescue DataMapper::SaveFailureError => e
+          raise model.errors.inspect
+        end
+      end
+    end
+  end
 end

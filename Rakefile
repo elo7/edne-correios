@@ -9,6 +9,14 @@ end
 
 namespace :db do
   task :migrate do
-    Application.migrate
+    Application.migrate_up
   end
+
+  task :drop do
+    Application.migrate_down
+  end
+end
+
+task :import do
+  Application.import_from_log
 end
