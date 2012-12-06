@@ -17,6 +17,11 @@ namespace :db do
   end
 end
 
-task :import do
-  Application.import_from_log
+namespace :import do
+  task :log do
+    Application.import_from_log
+  end
+  task :delta do
+    Application.import_from_delta
+  end
 end

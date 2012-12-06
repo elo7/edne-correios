@@ -10,9 +10,16 @@ class Application
   end
 
   def self.import_from_log
-    MODELS.each do |model|
-      puts "\n[#{model}] importing from log"
-      model.import_from_log
+    MODEL_CLASSES.each do |model_class|
+      puts "\n[#{model_class}] importing from log"
+      model_class.import_from_log
+    end
+  end
+
+  def self.import_from_delta
+    MODEL_CLASSES.each do |model_class|
+      puts "\n[#{model_class}] importing from delta"
+      model_class.import_from_delta
     end
   end
 end
