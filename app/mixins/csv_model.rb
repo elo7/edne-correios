@@ -42,6 +42,7 @@ module CSVModel
       models = []
 
       open(file_name, "r:ISO-8859-1").readlines.each do |line|
+        line.encode! "UTF-8"
         line.gsub! "\n", ""
         line.gsub! "\r", ""
 

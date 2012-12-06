@@ -25,3 +25,4 @@ namespace :import do
     Application.import_from_delta
   end
 end
+
