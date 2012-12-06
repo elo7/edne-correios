@@ -15,6 +15,7 @@
 
 class GrandeUsuario
   include CSVModel
+  include CSVModelDelta
   include DataMapper::Resource
 
   COLUMN_NAMES = %w(gru_nu ufe_sg loc_nu bai_nu log_nu gru_no gru_endereco cep gru_no_abrev gru_operacao cep_ant)

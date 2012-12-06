@@ -17,6 +17,7 @@
 
 class Logradouro
   include CSVModel
+  include CSVModelDelta
   include DataMapper::Resource
 
   COLUMN_NAMES = %w(log_nu ufe_sg loc_nu bai_nu_ini bai_nu_fim log_no log_complemento cep tlo_tx log_sta_tlo log_no_abrev log_operacao cep_ant)

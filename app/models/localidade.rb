@@ -18,6 +18,7 @@
 
 class Localidade
   include CSVModel
+  include CSVModelDelta
   include DataMapper::Resource
 
   COLUMN_NAMES = %w(loc_nu ufe_sg loc_no cep loc_in_sit loc_in_tipo_loc loc_nu_sub loc_no_abrev mun_nu loc_operacao cep_ant)

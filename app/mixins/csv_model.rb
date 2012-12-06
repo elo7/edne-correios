@@ -16,17 +16,6 @@ module CSVModel
     column_names.collect {|name| public_send name }.join "@"
   end
 
-  def insertable?
-    operation_attribute == "INS"
-  end
-
-  def deletable?
-    operation_attribute == "DEL"
-  end
-
-  def updatable?
-    operation_attribute == "UPD"
-  end
 
   module ClassMethods
     def csv_model options={}
@@ -44,7 +33,7 @@ module CSVModel
         options.fetch(:log_file_name)
       end
 
-      define_method :operation_attribute do
+      define_method :operation do
         public_send options.fetch(:operation_attribute)
       end
     end

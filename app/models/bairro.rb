@@ -10,6 +10,7 @@
 
 class Bairro
   include CSVModel
+  include CSVModelDelta
   include DataMapper::Resource
 
   COLUMN_NAMES = %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao)
