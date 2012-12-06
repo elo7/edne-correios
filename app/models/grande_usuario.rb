@@ -27,5 +27,9 @@ class GrandeUsuario
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
+
+  def self.find_same model
+    all gru_nu: model.gru_nu
+  end
 end
 

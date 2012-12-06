@@ -39,4 +39,8 @@ class Logradouro
       end
     end
   end
+
+  def self.find_same model
+    all log_nu: model.log_nu
+  end
 end

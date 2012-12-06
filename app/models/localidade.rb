@@ -30,5 +30,9 @@ class Localidade
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
+
+  def self.find_same model
+    all loc_nu: model.loc_nu
+  end
 end
 

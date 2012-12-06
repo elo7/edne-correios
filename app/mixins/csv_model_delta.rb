@@ -23,15 +23,15 @@ module CSVModelDelta
           model.save
           print "I"
         elsif model.deletable?
-        # model.class.where("").delete
+          model.class.find_same(model).destroy
           print "D"
         elsif model.updatable?
-        # model2 = model.class.where("").delete
-        # model2.fill! model.to_s
-        # model2.save
+          model_to_update = model.class.find_same(model).first
+          model_to_update.fill! model.to_s
+          model_to_update.save
           print "U"
         end
-        #print "."
+        print "."
       end
     end
   end

@@ -22,5 +22,9 @@ class Bairro
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
+
+  def self.find_same model
+    all bai_nu: model.bai_nu
+  end
 end
 
