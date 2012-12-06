@@ -8,8 +8,10 @@ describe CSVModel do
 
     attr_accessor :bai_nu, :ufe_sg, :loc_nu, :bai_no, :bai_no_abrev, :bai_operacao
 
-    csv_model column_names: %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao),
-      default_file_name: "SAMPLE_MODEL.TXT", operation_attribute: :bai_operacao
+    csv_model column_names:  %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao),
+      log_file_name:         "./spec/fixtures/log/SAMPLE.TXT",
+      delta_file_name:       "./spec/fixtures/delta/SAMPLE.TXT",
+      operation_attribute:   :bai_operacao
   end
 
   before do
@@ -25,62 +27,28 @@ describe CSVModel do
     end
   end
 
-  describe "#insertable?" do
-    it "should be insertable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@INS".split "@"
-      assert @model.insertable?
-    end
-
-    it "should not be insertable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@".split "@"
-      assert (not @model.insertable?)
-    end
-
-    it "should not be insertable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@UPD"
-      assert (not @model.insertable?)
-    end
-  end
-
-  describe "#updatable?" do
-    it "should be updatable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@UPD".split "@"
-      assert @model.updatable?
-    end
-
-    it "should not be updatable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@".split "@"
-      assert (not @model.updatable?)
-    end
-
-    it "should not be updatable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@DEL"
-      assert (not @model.updatable?)
-    end
-  end
-
-  describe "#deletable?" do
-    it "should be deletable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@DEL".split "@"
-      assert @model.deletable?
-    end
-
-    it "should not be deletable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@".split "@"
-      assert (not @model.deletable?)
-    end
-
-    it "should not be deletable" do
-      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@INS"
-      assert (not @model.deletable?)
-    end
-  end
-
   describe "#parse" do
     it "parses default file" do
       models = SampleModel.parse "./spec/fixtures/sample_model.fixture"
       assert_equal models[0].to_s, "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@DEL"
       assert_equal models[1].to_s, "13371@RS@7953@Loteamento Escola Rural@Lot E Rural@DEL"
+    end
+  end
+
+  describe "#operation" do
+    it "should be DEL" do
+      @model.fill! "13370@RS@7953@Loteamento Cidade Universitaria@Lot C Universitaria@DEL".split "@"
+      assert_equal "DEL", @model.operation
+    end
+
+    it "should be INS" do
+      @model.fill! "13370@rs@7953@loteamento cidade universitaria@lot c universitaria@INS".split "@"
+      assert_equal "INS", @model.operation
+    end
+
+    it "should be UPD" do
+      @model.fill! "13370@rs@7953@loteamento cidade universitaria@lot c universitaria@UPD".split "@"
+      assert_equal "UPD", @model.operation
     end
   end
 end

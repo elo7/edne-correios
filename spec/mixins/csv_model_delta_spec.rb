@@ -2,15 +2,17 @@
 
 require "./spec/spec_helper"
 
-describe CSVModel do
+describe CSVModelDelta do
   class SampleModel
     include CSVModel
     include CSVModelDelta
 
     attr_accessor :bai_nu, :ufe_sg, :loc_nu, :bai_no, :bai_no_abrev, :bai_operacao
 
-    csv_model column_names: %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao),
-      default_file_name: "SAMPLE_MODEL.TXT", operation_attribute: :bai_operacao
+    csv_model column_names:  %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao),
+      log_file_name:         "./spec/fixtures/log/SAMPLE.TXT",
+      delta_file_name:       "./spec/fixtures/delta/SAMPLE.TXT",
+      operation_attribute:   :bai_operacao
   end
 
   before do

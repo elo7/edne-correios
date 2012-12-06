@@ -1,4 +1,4 @@
 vendor/ruby
 .DS_Store
 data/*
-*.sqlite
+*.sqlite3

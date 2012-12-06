@@ -7,13 +7,13 @@ module CSVModel
   end
 
   def fill! row
-    column_names.each_with_index do |name, index|
+    self.class.column_names.each_with_index do |name, index|
       public_send "#{name}=", row[index]
     end
   end
 
   def to_s
-    column_names.collect {|name| public_send name }.join "@"
+    self.class.column_names.collect {|name| public_send name }.join "@"
   end
 
 
@@ -21,15 +21,15 @@ module CSVModel
     def csv_model options={}
       column_names = options.fetch(:column_names)
 
-      define_method :column_names do
+      define_singleton_method :column_names do
         column_names
       end
 
-      define_method :delta_file_name do
+      define_singleton_method :delta_file_name do
         options.fetch(:delta_file_name)
       end
 
-      define_method :log_file_name do
+      define_singleton_method :log_file_name do
         options.fetch(:log_file_name)
       end
 
@@ -52,8 +52,8 @@ module CSVModel
       models
     end
 
-    def self.import_from_log
-      parse(self.log_file_name).each do |model|
+    def import_from_log
+      parse(log_file_name).each do |model|
         model.save
         print "."
       end
