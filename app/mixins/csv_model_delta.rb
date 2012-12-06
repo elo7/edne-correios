@@ -20,16 +20,16 @@ module CSVModelDelta
     def import_from_delta
       parse(delta_file_name).each do |model|
         if model.insertable?
-        # model.save
-          print "i"
+          model.save
+          print "I"
         elsif model.deletable?
         # model.class.where("").delete
-          print "d"
+          print "D"
         elsif model.updatable?
         # model2 = model.class.where("").delete
         # model2.fill! model.to_s
         # model2.save
-          print "u"
+          print "U"
         end
         #print "."
       end
