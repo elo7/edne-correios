@@ -15,20 +15,10 @@ class Bairro
   COLUMN_NAMES = %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao)
 
   csv_model column_names: COLUMN_NAMES,
-    default_file_name: "DELTA_LOG_BAIRRO.TXT"
+    log_file_name: "./data/log/LOG_BAIRRO.TXT",
+    delta_file_name: "./data/delta/DELTA_LOG_BAIRRO.TXT"
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
-
-  def self.import_from_log
-    parse("./data/log/LOG_BAIRRO.txt").each do |model|
-      begin
-        model.save
-        print "."
-      rescue DataMapper::SaveFailureError => e
-        raise model.errors.inspect
-      end
-    end
-  end
 end
 

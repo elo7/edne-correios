@@ -36,10 +36,12 @@ module CSVModel
         column_names
       end
 
-      column_names.each{|name| attr_accessor name}
+      define_method :delta_file_name do
+        options.fetch(:delta_file_name)
+      end
 
-      define_method :default_file_name do 
-        options.fetch(:default_file_name)
+      define_method :log_file_name do
+        options.fetch(:log_file_name)
       end
 
       define_method :operation_attribute do
@@ -47,7 +49,7 @@ module CSVModel
       end
     end
 
-    def parse file_name=self.default_file_name
+    def parse file_name
       models = []
 
       open(file_name, "r:ISO-8859-1").readlines.each do |line|
@@ -60,5 +62,13 @@ module CSVModel
       end
       models
     end
+
+    def self.import_from_log
+      parse(self.log_file_name).each do |model|
+        model.save
+        print "."
+      end
+    end
   end
 end
+

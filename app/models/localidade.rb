@@ -23,19 +23,10 @@ class Localidade
   COLUMN_NAMES = %w(loc_nu ufe_sg loc_no cep loc_in_sit loc_in_tipo_loc loc_nu_sub loc_no_abrev mun_nu loc_operacao cep_ant)
 
   csv_model column_names: COLUMN_NAMES,
-            default_file_name: "DELTA_LOG_LOCALIDADE.TXT"
+    log_file_name: "./data/log/LOG_LOCALIDADE.TXT",
+    delta_file_name: "./data/delta/DELTA_LOG_LOCALIDADE.TXT"
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
-
-  def self.import_from_log
-    parse("./data/log/LOG_LOCALIDADE.txt").each do |model|
-      begin
-        model.save
-        print "."
-      rescue DataMapper::SaveFailureError => e
-        raise model.errors.inspect
-      end
-    end
-  end
 end
+

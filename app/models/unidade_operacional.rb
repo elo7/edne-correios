@@ -21,19 +21,10 @@ class UnidadeOperacional
   COLUMN_NAMES = %w(uop_nu ufe_sg loc_nu bai_nu log_nu uop_no uop_endereco cep uop_in_cp uop_no_abrev uop_operacao cep_ant)
 
   csv_model column_names: COLUMN_NAMES,
-            default_file_name: "DELTA_LOG_UNID_OPER.TXT"
+    log_file_name: "./data/log/LOG_UNID_OPER.TXT",
+    delta_file_name: "./data/delta/DELTA_LOG_UNID_OPER.TXT"
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
-
-  def self.import_from_log
-    parse("./data/log/LOG_UNID_OPER.txt").each do |model|
-      begin
-        model.save
-        print "."
-      rescue DataMapper::SaveFailureError => e
-        raise model.errors.inspect
-      end
-    end
-  end
 end
+
