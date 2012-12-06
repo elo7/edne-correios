@@ -22,7 +22,8 @@ class GrandeUsuario
 
   csv_model column_names: COLUMN_NAMES,
     log_file_name: "./data/log/LOG_GRANDE_USUARIO.TXT",
-    delta_file_name: "./data/delta/DELTA_LOG_GRANDE_USUARIO.TXT"
+    delta_file_name: "./data/delta/DELTA_LOG_GRANDE_USUARIO.TXT",
+    operation_attribute: :gru_operacao
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}

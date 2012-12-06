@@ -24,7 +24,9 @@ class Logradouro
 
   csv_model column_names: COLUMN_NAMES,
     log_file_name: nil,
-    delta_file_name: "./data/delta/DELTA_LOG_LOGRADOURO.TXT"
+    delta_file_name: "./data/delta/DELTA_LOG_LOGRADOURO.TXT",
+    operation_attribute: :log_operacao
+
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
