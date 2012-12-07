@@ -24,5 +24,8 @@ namespace :import do
   task :delta do
     Application.import_from_delta
   end
+  task :join do
+    Application.join
+  end
 end
 
