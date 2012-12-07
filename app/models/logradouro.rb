@@ -23,9 +23,9 @@ class Logradouro
   COLUMN_NAMES = %w(log_nu ufe_sg loc_nu bai_nu_ini bai_nu_fim log_no log_complemento cep tlo_tx log_sta_tlo log_no_abrev log_operacao cep_ant)
 
   csv_model column_names: COLUMN_NAMES,
-    log_file_name: nil,
-    delta_file_name: "./data/delta/DELTA_LOG_LOGRADOURO.TXT",
-    operation_attribute: :log_operacao
+            log_file_name: nil,
+            delta_file_name: "./data/delta/DELTA_LOG_LOGRADOURO.TXT",
+            operation_attribute: :log_operacao
 
 
   property :id, Serial

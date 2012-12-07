@@ -16,9 +16,9 @@ class Bairro
   COLUMN_NAMES = %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao)
 
   csv_model column_names: COLUMN_NAMES,
-    log_file_name: "./data/log/LOG_BAIRRO.TXT",
-    delta_file_name: "./data/delta/DELTA_LOG_BAIRRO.TXT",
-    operation_attribute: :bai_operacao
+            log_file_name: "./data/log/LOG_BAIRRO.TXT",
+            delta_file_name: "./data/delta/DELTA_LOG_BAIRRO.TXT",
+            operation_attribute: :bai_operacao
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}

@@ -22,9 +22,9 @@ class UnidadeOperacional
   COLUMN_NAMES = %w(uop_nu ufe_sg loc_nu bai_nu log_nu uop_no uop_endereco cep uop_in_cp uop_no_abrev uop_operacao cep_ant)
 
   csv_model column_names: COLUMN_NAMES,
-    log_file_name: "./data/log/LOG_UNID_OPER.TXT",
-    delta_file_name: "./data/delta/DELTA_LOG_UNID_OPER.TXT",
-    operation_attribute: :uop_operacao
+            log_file_name: "./data/log/LOG_UNID_OPER.TXT",
+            delta_file_name: "./data/delta/DELTA_LOG_UNID_OPER.TXT",
+            operation_attribute: :uop_operacao
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}

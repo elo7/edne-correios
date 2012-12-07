@@ -24,9 +24,9 @@ class Localidade
   COLUMN_NAMES = %w(loc_nu ufe_sg loc_no cep loc_in_sit loc_in_tipo_loc loc_nu_sub loc_no_abrev mun_nu loc_operacao cep_ant)
 
   csv_model column_names: COLUMN_NAMES,
-    log_file_name: "./data/log/LOG_LOCALIDADE.TXT",
-    delta_file_name: "./data/delta/DELTA_LOG_LOCALIDADE.TXT",
-    operation_attribute: :loc_operacao
+            log_file_name: "./data/log/LOG_LOCALIDADE.TXT",
+            delta_file_name: "./data/delta/DELTA_LOG_LOCALIDADE.TXT",
+            operation_attribute: :loc_operacao
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}

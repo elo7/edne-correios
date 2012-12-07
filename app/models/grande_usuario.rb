@@ -21,9 +21,9 @@ class GrandeUsuario
   COLUMN_NAMES = %w(gru_nu ufe_sg loc_nu bai_nu log_nu gru_no gru_endereco cep gru_no_abrev gru_operacao cep_ant)
 
   csv_model column_names: COLUMN_NAMES,
-    log_file_name: "./data/log/LOG_GRANDE_USUARIO.TXT",
-    delta_file_name: "./data/delta/DELTA_LOG_GRANDE_USUARIO.TXT",
-    operation_attribute: :gru_operacao
+            log_file_name: "./data/log/LOG_GRANDE_USUARIO.TXT",
+            delta_file_name: "./data/delta/DELTA_LOG_GRANDE_USUARIO.TXT",
+            operation_attribute: :gru_operacao
 
   property :id, Serial
   COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
