@@ -25,12 +25,16 @@ class Application
     end
   end
 
+  def self.dump
+    system "echo '.dump ceps' | sqlite3 ./db/database.sqlite3 > db/ceps.sql"
+  end
+
   def self.join
 
-    DataMapper.repository(:default).adapter.execute "DELETE FROM cep_list"
+    DataMapper.repository(:default).adapter.execute "DELETE FROM ceps"
 
     query = "
-      INSERT INTO cep_list
+      INSERT INTO ceps
       SELECT  RS.CEP AS CEP,
               RS.ENDERECO AS ENDERECO,
               RS.BAIRRO AS BAIRRO,

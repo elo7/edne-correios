@@ -1,5 +1,7 @@
 require "./config/boot.rb"
 require "rake/testtask"
+require "irb"
+require "irb/completion"
 
 task default: :test
 
@@ -15,6 +17,10 @@ namespace :db do
   task :drop do
     Application.migrate_down
   end
+
+  task :dump do
+    Application.dump
+  end
 end
 
 namespace :import do
@@ -27,5 +33,11 @@ namespace :import do
   task :join do
     Application.join
   end
+
+  task all: [:log, :delta, :join]
 end
 
+task :console do
+  ARGV.clear
+  IRB.start
+end

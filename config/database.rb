@@ -28,9 +28,9 @@ MODEL_CLASSES.each_with_index do |model_class, index|
   end
 end
 
-migration MODEL_CLASSES.size + 1, :create_table_cep_list do
+migration MODEL_CLASSES.size + 1, :create_table_ceps do
   up do
-    create_table :cep_list do
+    create_table :ceps do
       column :cep, String, length: 255
       column :endereco, String, length: 255
       column :bairro, String, length: 255
@@ -41,6 +41,6 @@ migration MODEL_CLASSES.size + 1, :create_table_cep_list do
   end
 
   down do
-    drop_table :cep_list
+    drop_table :ceps
   end
 end
