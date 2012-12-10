@@ -25,10 +25,10 @@ module CSVModelDelta
           model.save
 
         elsif model.deletable?
-          model.class.find_same(model).destroy
+          model.find_same.destroy
 
         elsif model.updatable?
-          model_to_update = model.class.find_same(model).first
+          model_to_update = model.find_same
           model_to_update.fill! model.to_s
           model_to_update.save
         end

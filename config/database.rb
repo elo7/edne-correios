@@ -17,8 +17,15 @@ MODEL_CLASSES.each_with_index do |model_class, index|
   migration index + 1, "create_#{table_name}_table" do
     up do
       create_table table_name do
-        column :id, Integer , serial: true
-        model_class::COLUMN_NAMES.each{|column_name| column(column_name, String, length: 255)}
+        column_index = 0
+        model_class.column_names.each do |column_name|
+          if column_index == 0
+            column column_name, String, length: 255, key: true
+          else
+            column column_name, String, length: 255
+          end
+          column_index = column_index + 1
+        end
       end
     end
 

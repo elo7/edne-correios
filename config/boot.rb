@@ -1,5 +1,11 @@
 require "data_mapper"
-Dir[File.expand_path("../../app/*/*.rb", __FILE__)].each do |file|
-  require file
-end
+require "./app/util/progress_logger.rb"
+require "./app/mixins/csv_model.rb"
+require "./app/mixins/csv_model_delta.rb"
+require "./app/models/base_model.rb"
+require "./app/models/bairro.rb"
+require "./app/models/localidade.rb"
+require "./app/models/unidade_operacional.rb"
+require "./app/models/grande_usuario.rb"
+require "./app/models/logradouro.rb"
 require "./config/application.rb"

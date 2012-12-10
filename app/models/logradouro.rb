@@ -15,32 +15,23 @@
 # LOG_OPERACAO    | Operação: DEL, INS, UPD                                             | CHAR(3)
 # CEP_ANT         | CEP Anterior do Logradouro. Campo informado para LOG_OPERACAO =UPD. | CHAR(8)
 
-class Logradouro
-  include CSVModel
-  include CSVModelDelta
-  include DataMapper::Resource
+class Logradouro < BaseModel
 
-  COLUMN_NAMES = %w(log_nu ufe_sg loc_nu bai_nu_ini bai_nu_fim log_no log_complemento cep tlo_tx log_sta_tlo log_no_abrev log_operacao cep_ant)
-
-  csv_model column_names: COLUMN_NAMES,
-            log_file_name: nil,
-            delta_file_name: "./data/delta/DELTA_LOG_LOGRADOURO.TXT",
-            operation_attribute: :log_operacao
-
-
-  property :id, Serial
-  COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
+  model column_names:        %w(log_nu ufe_sg loc_nu bai_nu_ini bai_nu_fim log_no log_complemento cep tlo_tx log_sta_tlo log_no_abrev log_operacao cep_ant),
+        log_file_name:       nil,
+        delta_file_name:     "./data/delta/DELTA_LOG_LOGRADOURO.TXT",
+        operation_attribute: :log_operacao
 
   def self.import_from_log
     %w(AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO).each do |uf|
+      print "\n[#{uf}]\n"
+      progress = ProgressLogger.new 100
+
       parse("./data/log/LOG_LOGRADOURO_#{uf}.txt").each do |model|
         model.save
-        print "."
+
+        progress.log
       end
     end
-  end
-
-  def self.find_same model
-    all log_nu: model.log_nu
   end
 end

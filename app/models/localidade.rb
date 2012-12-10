@@ -16,22 +16,11 @@
 # LOC_OPERACAO    | Operação: DEL = Delete, INS  = Insert, UPD = Update                                     | CHAR(3)
 # CEP_ANT         | CEP anterior da localidade. Campo informado para LOC_OPERACAO=UPD                       | CHAR(8)
 
-class Localidade
-  include CSVModel
-  include CSVModelDelta
-  include DataMapper::Resource
+class Localidade < BaseModel
 
-  COLUMN_NAMES = %w(loc_nu ufe_sg loc_no cep loc_in_sit loc_in_tipo_loc loc_nu_sub loc_no_abrev mun_nu loc_operacao cep_ant)
+  model column_names:        %w(loc_nu ufe_sg loc_no cep loc_in_sit loc_in_tipo_loc loc_nu_sub loc_no_abrev mun_nu loc_operacao cep_ant),
+        log_file_name:       "./data/log/LOG_LOCALIDADE.TXT",
+        delta_file_name:     "./data/delta/DELTA_LOG_LOCALIDADE.TXT",
+        operation_attribute: :loc_operacao
 
-  csv_model column_names: COLUMN_NAMES,
-            log_file_name: "./data/log/LOG_LOCALIDADE.TXT",
-            delta_file_name: "./data/delta/DELTA_LOG_LOCALIDADE.TXT",
-            operation_attribute: :loc_operacao
-
-  property :id, Serial
-  COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
-
-  def self.find_same model
-    all loc_nu: model.loc_nu
-  end
 end

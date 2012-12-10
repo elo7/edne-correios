@@ -30,7 +30,6 @@ class Application
   end
 
   def self.join
-
     DataMapper.repository(:default).adapter.execute "DELETE FROM ceps"
 
     query = "
@@ -86,22 +85,22 @@ class Application
 
                 UNION ALL
 
-                SELECT  uni.CEP                AS CEP,
-                        uni.UOP_ENDERECO       AS ENDERECO,
-                        ifnull(bai.BAI_NO, '') AS BAIRRO,
-                        loc.LOC_NO             AS CIDADE,
-                        uni.UFE_SG             AS UF
+                SELECT  uni.CEP                  AS CEP,
+                        uni.UOP_ENDERECO         AS ENDERECO,
+                        ifnull(bai.BAI_NO, '')   AS BAIRRO,
+                        loc.LOC_NO               AS CIDADE,
+                        uni.UFE_SG               AS UF
                 FROM unidade_operacionals uni
                 LEFT JOIN bairros bai     ON uni.BAI_NU = bai.BAI_NU
                 LEFT JOIN localidades loc ON bai.LOC_NU = loc.LOC_NU
 
                 UNION ALL
 
-                SELECT  gra.CEP                AS CEP,
-                        gra.GRU_ENDERECO       AS ENDERECO,
-                        ifnull(bai.BAI_NO, '') AS BAIRRO,
-                        loc.LOC_NO             AS CIDADE,
-                        gra.UFE_SG             AS UF
+                SELECT  gra.CEP                  AS CEP,
+                        gra.GRU_ENDERECO         AS ENDERECO,
+                        ifnull(bai.BAI_NO, '')   AS BAIRRO,
+                        loc.LOC_NO               AS CIDADE,
+                        gra.UFE_SG               AS UF
                 FROM grande_usuarios gra
                 LEFT JOIN bairros bai     ON gra.BAI_NU = bai.BAI_NU
                 LEFT JOIN localidades loc ON bai.LOC_NU = loc.LOC_NU

@@ -8,22 +8,11 @@
 # BAI_NO_ABREV | abreviatura do nome do bairro (opcional)            | VARCHAR2(36)
 # BAI_OPERACAO | Operação: DEL = Delete, INS  = Insert, UPD = Update | CHAR(3)
 
-class Bairro
-  include CSVModel
-  include CSVModelDelta
-  include DataMapper::Resource
+class Bairro < BaseModel
 
-  COLUMN_NAMES = %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao)
+  model column_names:        %w(bai_nu ufe_sg loc_nu bai_no bai_no_abrev bai_operacao),
+        log_file_name:       "./data/log/LOG_BAIRRO.TXT",
+        delta_file_name:     "./data/delta/DELTA_LOG_BAIRRO.TXT",
+        operation_attribute: :bai_operacao
 
-  csv_model column_names: COLUMN_NAMES,
-            log_file_name: "./data/log/LOG_BAIRRO.TXT",
-            delta_file_name: "./data/delta/DELTA_LOG_BAIRRO.TXT",
-            operation_attribute: :bai_operacao
-
-  property :id, Serial
-  COLUMN_NAMES.each {|column_name| property(column_name, String, length: 255)}
-
-  def self.find_same model
-    all bai_nu: model.bai_nu
-  end
 end
