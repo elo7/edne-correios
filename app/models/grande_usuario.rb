@@ -32,4 +32,3 @@ class GrandeUsuario
     all gru_nu: model.gru_nu
   end
 end
-

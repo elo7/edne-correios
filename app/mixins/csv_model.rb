@@ -54,9 +54,11 @@ module CSVModel
     end
 
     def import_from_log
+      progress = ProgressLogger.new 100
+
       parse(log_file_name).each do |model|
         model.save
-        print "."
+        progress.log
       end
     end
   end

@@ -27,4 +27,3 @@ class Bairro
     all bai_nu: model.bai_nu
   end
 end
-

@@ -33,4 +33,3 @@ class UnidadeOperacional
     all uop_nu: model.uop_nu
   end
 end
-

@@ -35,4 +35,3 @@ class Localidade
     all loc_nu: model.loc_nu
   end
 end
-
