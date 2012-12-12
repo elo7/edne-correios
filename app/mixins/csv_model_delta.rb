@@ -29,7 +29,7 @@ module CSVModelDelta
 
         elsif model.updatable?
           model_to_update = model.find_same
-          model_to_update.fill! model.to_s
+          model_to_update.merge! model
           model_to_update.save
         end
 

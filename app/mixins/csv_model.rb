@@ -6,6 +6,10 @@ module CSVModel
     base.extend ClassMethods
   end
 
+  def merge! model
+    fill!(model.to_s.split("@"))
+  end
+
   def fill! row
     self.class.column_names.each_with_index do |name, index|
       public_send "#{name}=", row[index]

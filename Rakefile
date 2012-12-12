@@ -1,5 +1,6 @@
 require "./config/boot.rb"
 require "rake/testtask"
+require "pry"
 require "irb"
 require "irb/completion"
 
