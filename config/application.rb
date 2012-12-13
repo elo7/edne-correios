@@ -104,7 +104,8 @@ class Application
                 FROM grande_usuarios gra
                 LEFT JOIN bairros bai     ON gra.BAI_NU = bai.BAI_NU
                 LEFT JOIN localidades loc ON bai.LOC_NU = loc.LOC_NU
-      ) RS"
+      ) RS
+      WHERE RS.CEP <> ''"
 
     DataMapper.repository(:default).adapter.execute query
   end
