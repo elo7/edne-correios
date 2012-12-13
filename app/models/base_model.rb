@@ -15,14 +15,15 @@ class BaseModel
     storage_names[:default] = DataMapper::NamingConventions::Resource::UnderscoredAndPluralized.call(self)
   end
 
+  private
   def self.create_properties column_names
-    first_column = column_names.shift
+    correios_pk = column_names.shift
 
     define_method :find_same do
-      self.class.all(first_column.to_sym => public_send(first_column)).first
+      self.class.all(correios_pk.to_sym => public_send(correios_pk)).first
     end
 
-    property first_column, String, length: 255, key: true
+    property correios_pk, String, length: 255, key: true
     column_names.each do |column_name|
       property column_name, String, length: 255
     end
