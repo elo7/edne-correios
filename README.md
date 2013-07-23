@@ -26,7 +26,7 @@ bundle exec rake db:migrate
 
 ### Baixando os arquivos dos Correios
 
-Depois de comprar a base [nos sites dos Correios](http://shopping.correios.com.br/wbm/shopping/script/default.aspx), você terá acesso aos arquivos na área de **Meus Downloads**. 
+Depois de comprar a base [no site dos Correios](http://shopping.correios.com.br/wbm/shopping/script/default.aspx), você terá acesso aos arquivos na área de **Meus Downloads**. 
 
 Os Correios disponibilizam dois tipos de arquivos:
 
@@ -37,16 +37,15 @@ Os Correios disponibilizam dois tipos de arquivos:
   </tr>
   <tr>
     <td>Esse arquivo possui todos os dados do Brasil, atualizados até a data indicada.</td>
-    <td>Durante o ano, os Correios disponibilizam atualizações em relação aquela base, mas eles fazem isso nesse outro formato.</td>
+    <td>Durante o ano, os Correios disponibilizam atualizações em relação àquela base, mas eles fazem isso nesse outro formato.</td>
     </tr>
 </table>
 
-Baixe apenas o arquivo base e a último de atualização.
+Baixe apenas o arquivo base e o último de atualização.
 
 ### Preparando os arquivos
 
 Coloque os arquivos dentro das pastas designadas no projeto `edne-correios`.
-
 
 ```shell
 mv eDNE_Basico_ddmm/Delimitado/LOG* edne-correios/data/log/
@@ -61,11 +60,21 @@ bundle exec rake import:base
 bundle exec rake import:delta
 ```
 
-Se você quiser exportar uma versão consolidada do CEP para consultas rápidas, execute:
+**Pronto!** Agora você tem todas as informações no banco de dados. 
+
+Recomendamos exportar uma versão consolidada dos CEPs para consultas mais rápidas. Utilizamos o seguinte modelo:
+```sql
+CREATE TABLE `ceps` (
+  `cep` varchar(8) NOT NULL,
+  `endereco` varchar(255) NOT NULL,
+  `bairro` varchar(255) NOT NULL,
+  `cidade` varchar(255) NOT NULL,
+  `estado` varchar(2) NOT NULL,
+  `nome_estado` varchar(255) NOT NULL,
+  PRIMARY KEY (`cep`)
+);
+```
+O comando abaixo irá exportar todos os CEPs para esse formato.
 ```shell
 bundle exec rake import:join
 ```
-
-Isso é recomendado para agilizar a consulta de CEPs.
-
-
