@@ -2,11 +2,11 @@
 
 O e-DNE é um banco de dados que contém todos os CEPs do Brasil.
 
-No entanto, essa base é disponibilizada apenas para download. Então criamos uma ferramenta para importar essa base para nosso banco de dados.
+No entanto, essa base é disponibilizada apenas para download. Então criamos uma ferramenta para importar essa base para nosso banco de dados. Você pode baixar o código [no Github](https://github.com/elo7/edne-correios) ou seguir os passos pra instalação.
 
 ### Instalação
 
-Baixe o projeto:
+Baixe o projeto usando Git:
 ```shell
 git clone git@github.com:elo7/edne-correios.git
 ```
