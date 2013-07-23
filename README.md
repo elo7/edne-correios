@@ -1,12 +1,10 @@
 # e-DNE Correios
 
-O e-DNE, é um banco de dados que contém mais de 900 mil CEP de todo o Brasil, constituído de elementos de endereçamento (descrição de logradouros, bairros, municípios, vilas, povoados) e Códigos de Endereçamento Postal - CEP. É a base oficial e exclusiva dos Correios, sendo assim, a informação é confiável e atualizada.
+O e-DNE é um banco de dados que contém todos os CEPs do Brasil.
 
-## Instalação
-Essa ferramenta foi desenvolvida usando Ruby 1.9, verifique que você possui essa versão usando `ruby -v`. 
-Caso possua uma outra versão, recomendamos a instalação via [RVM](https://rvm.io/), pela praticidade.
+No entanto, essa base é disponibilizada apenas para download. Então criamos uma ferramenta para importar essa base para nosso banco de dados.
 
-Assim que estiver com a versão de Ruby correta, instale o Bundler caso não tenha: `gem install bundler`.
+### Instalação
 
 Baixe as dependências do projeto:
 
@@ -14,36 +12,48 @@ Baixe as dependências do projeto:
 bundle install
 ```
 
-## Preparando o banco de dados temporário
+### Preparando o banco de dados
 
-### Se você prefere usar MySQL
-Crie um banco local chamado `edne-correios` e configure o usuario e senha no arquivo `config/database.rb`. 
+Primeiramente vamos importar as informações dos Correios em um banco de dados temporário.
 
-### Se você prefere usar SQLite
-Troque as linhas do arquivo `config/database.rb`.
+No arquivo `config/database.rb` você encontra as configurações de usuário, senha e banco de dados (MySQL ou SQLite).
 
+Execute o comando abaixo para criar a estrutura básica das tabelas:
 
 ```shell
 bundle exec rake db:migrate
 ```
 
-## Preparando os arquivos dos Correios
+### Baixando os arquivos dos Correios
 
-Depois de comprar a base [nos sites dos Correios](http://shopping.correios.com.br/wbm/shopping/script/default.aspx), vá para a área de *Meus Downloads*:
+Depois de comprar a base [nos sites dos Correios](http://shopping.correios.com.br/wbm/shopping/script/default.aspx), você terá acesso aos arquivos na área de **Meus Downloads**. 
 
-![](http://f.cl.ly/items/0M213M0D1V2O0a0r2K1m/Screen%20Shot%202013-07-23%20at%201.33.14%20PM.png)
+Os Correios disponibilizam dois tipos de arquivos:
 
-Baixe apenas os arquivos que forem necessários. Como podemos ver na página, precisamos apenas de:
-- e-DNE Básico - Atualizado até 14/04/2013
-- Atualização do e-DNE Básico - Até 14/06/2013
+<table>
+  <tr>
+    <td><strong>e-DNE Básico - Atualizado até dd/mm/yyyy</strong></td>
+    <td><strong>Atualização do e-DNE Básico - Até dd/mm/yyyy</strong></td>
+  </tr>
+  <tr>
+    <td>Esse arquivo possui todos os dados do Brasil, atualizados até a data indicada.</td>
+    <td>Durante o ano, os Correios disponibilizam atualizações em relação aquela base, mas eles fazem isso nesse outro formato.</td>
+    </tr>
+</table>
 
-Coloque os arquivos no lugar certo:
+Baixe apenas o arquivo base e a último de atualização.
+
+### Preparando os arquivos
+
+Coloque os arquivos dentro das pastas designadas no projeto `edne-correios`.
+
+
 ```shell
 mv eDNE_Basico_ddmm/Delimitado/LOG* edne-correios/data/log/
-mv eDNE_Delta_Basico_ddmm/Delimitado/DELTA* edne-correios/data/delta
+mv eDNE_Delta_Basico_ddmm/Delimitado/DELTA* edne-correios/data/delta/
 ```
 
-## Importação e Exportação
+### Importação
 
 Importe a base e o delta:
 ```shell
