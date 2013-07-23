@@ -6,6 +6,11 @@ No entanto, essa base é disponibilizada apenas para download. Então criamos um
 
 ### Instalação
 
+Baixe o projeto:
+```shell
+git clone git@github.com:elo7/edne-correios.git
+```
+
 Baixe as dependências do projeto:
 
 ```shell
