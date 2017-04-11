@@ -2,7 +2,9 @@
 
 O e-DNE é um banco de dados que contém todos os CEPs do Brasil.
 
-No entanto, essa base é disponibilizada apenas para download. Então criamos uma ferramenta para importar essa base para nosso banco de dados. Você pode baixar o código [no Github](https://github.com/elo7/edne-correios) ou seguir os passos pra instalação.
+No entanto, essa base é disponibilizada apenas para download. Então criamos uma ferramenta para importar essa base para nosso banco de dados. Você pode baixar o código [no Github](https://github.com/pacificobr/edne-correios) ou seguir os passos pra instalação.
+
+Extraído originalmente de [Github](https://github.com/elo7/edne-correios)
 
 ### Instalação
 
@@ -21,7 +23,16 @@ bundle install
 
 Primeiramente vamos importar as informações dos Correios em um banco de dados temporário.
 
-No arquivo `config/database.rb` você encontra as configurações de usuário, senha e banco de dados (MySQL ou SQLite).
+Atualmente a ferramenta dá suporte para MySQL, SQLite e PostgreSQL. A configuração agora foi transferida para um arquivo externo localizado em `config/database.yml`. Caso queira usar o modo antigo com as configurações misturadas com código ficou comentado as linhas dentro do o arquivo `config/database.rb` com exemplos para SQLite e PostgreSQL:
+
+```ruby
+DataMapper.setup(:default,  "sqlite3:db/database.sqlite3")
+```
+ou 
+
+```ruby
+DataMapper.setup(:default, 'adapter://username:password@hostname/database')
+```
 
 Execute o comando abaixo para criar a estrutura básica das tabelas:
 
