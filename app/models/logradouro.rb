@@ -27,7 +27,7 @@ class Logradouro < BaseModel
       print "\n[#{uf}]\n"
       progress = ProgressLogger.new 100
 
-      parse("./data/log/LOG_LOGRADOURO_#{uf}.txt").each do |model|
+      parse("./data/log/LOG_LOGRADOURO_#{uf}.TXT").each do |model|
         model.save
 
         progress.log
