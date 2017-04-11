@@ -4,7 +4,7 @@ require "data_mapper"
 require "dm-migrations/migration_runner"
 
 #DataMapper.setup(:default,  "sqlite3:db/database.sqlite3")
-#DataMapper.setup(:default, 'postgres://postgres:postgres@siglmd-bd/correios')
+#DataMapper.setup(:default, 'adapter://username:password@hostname/database')
 options = YAML.load_file('config/database.yml')
 
 DataMapper.setup(:default, options)

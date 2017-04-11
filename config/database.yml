@@ -2,10 +2,11 @@
 
 #MySQL
 #adapter: mysql
-#hostname: "<hostname>"
+#host: "<hostname>"
 #port: "<port>"
 #user: "<user>"
 #password: "<password>"
+#database: "<database>"
 
 #SQLite
 
@@ -15,6 +16,7 @@
 #search_path: "<default schema>" #Optional change the default schema. Must be created before
 #port: "<port>"
 #user: "<user>"
-#database: "<database>"
 #password: "<password>"
+#database: "<database>"
+
 
