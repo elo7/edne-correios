@@ -25,7 +25,7 @@ module CSVModelDelta
           model.save
 
         elsif model.deletable?
-          model.find_same.destroy
+          model.find_same.destroy unless model.find_same.nil?
 
         elsif model.updatable?
           model_to_update = model.find_same
