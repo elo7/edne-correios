@@ -1,0 +1,22 @@
+#datbase.yml
+
+#MySQL
+#adapter: mysql
+#host: "<hostname>"
+#port: "<port>"
+#user: "<user>"
+#password: "<password>"
+#database: "<database>"
+
+#SQLite
+
+#PostgreSQL
+#adapter: postgres
+#host: "<hostname>"
+#search_path: "<default schema>" #Optional change the default schema. Must be created before
+#port: "<port>"
+#user: "<user>"
+#password: "<password>"
+#database: "<database>"
+
+

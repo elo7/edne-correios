@@ -3,7 +3,11 @@
 require "data_mapper"
 require "dm-migrations/migration_runner"
 
-DataMapper.setup(:default,  "sqlite3:db/database.sqlite3")
+#DataMapper.setup(:default,  "sqlite3:db/database.sqlite3")
+#DataMapper.setup(:default, 'adapter://username:password@hostname/database')
+options = YAML.load_file('config/database.yml')
+
+DataMapper.setup(:default, options)
 
 DataMapper::Logger.new STDOUT, :debug
 DataMapper::Model.raise_on_save_failure = true
