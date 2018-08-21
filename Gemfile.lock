@@ -4,7 +4,6 @@ GEM
     addressable (2.2.8)
     bcrypt-ruby (3.0.1)
     coderay (1.0.8)
-    columnize (0.3.6)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
       dm-constraints (~> 1.2.0)
@@ -15,15 +14,8 @@ GEM
       dm-transactions (~> 1.2.0)
       dm-types (~> 1.2.0)
       dm-validations (~> 1.2.0)
-    data_objects (0.10.10)
+    data_objects (0.10.17)
       addressable (~> 2.1)
-    debugger (1.1.4)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.3)
-    debugger-linecache (1.1.2)
-      debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.5)
     dm-aggregates (1.2.0)
       dm-core (~> 1.2.0)
     dm-constraints (1.2.0)
@@ -35,15 +27,15 @@ GEM
       dm-core (~> 1.2.0)
     dm-migrations (1.2.0)
       dm-core (~> 1.2.0)
+    dm-mysql-adapter (1.2.0)
+      dm-do-adapter (~> 1.2.0)
+      do_mysql (~> 0.10.6)
     dm-serializer (1.2.2)
       dm-core (~> 1.2.0)
       fastercsv (~> 1.5)
       json (~> 1.6)
       json_pure (~> 1.6)
       multi_json (~> 1.0)
-    dm-sqlite-adapter (1.2.0)
-      dm-do-adapter (~> 1.2.0)
-      do_sqlite3 (~> 0.10.6)
     dm-timestamps (1.2.0)
       dm-core (~> 1.2.0)
     dm-transactions (1.2.0)
@@ -58,10 +50,10 @@ GEM
       uuidtools (~> 2.1)
     dm-validations (1.2.0)
       dm-core (~> 1.2.0)
-    do_sqlite3 (0.10.10)
-      data_objects (= 0.10.10)
+    do_mysql (0.10.17)
+      data_objects (= 0.10.17)
     fastercsv (1.5.5)
-    json (1.7.5)
+    json (1.8.6)
     json_pure (1.7.5)
     method_source (0.8.1)
     multi_json (1.4.0)
@@ -69,9 +61,6 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.3.1)
-    pry-debugger (0.2.0)
-      debugger (~> 1.1.3)
-      pry (~> 0.9.9)
     rake (10.0.2)
     slop (3.3.3)
     stringex (1.5.1)
@@ -83,7 +72,12 @@ PLATFORMS
 DEPENDENCIES
   data_mapper
   dm-migrations
-  dm-sqlite-adapter
+  dm-mysql-adapter
   pry
-  pry-debugger
   rake
+
+RUBY VERSION
+   ruby 2.5.1p57
+
+BUNDLED WITH
+   1.16.2

@@ -1,5 +1,7 @@
 source :rubygems
 
+ruby '2.5.1'
+
 gem "rake"
 gem "data_mapper"
 #gem "dm-sqlite-adapter"
